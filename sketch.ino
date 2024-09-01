@@ -31,7 +31,7 @@ TM1637 tm(CLK, DIO);
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 // Hours that you want to sleep
-const int SLEEP_HOURS = 1;
+const int SLEEP_HOURS = 8;
 
 void setup() {
   // put your setup code here, to run once:
