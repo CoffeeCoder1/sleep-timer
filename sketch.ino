@@ -1,6 +1,7 @@
 #include <Wire.h>
 #include <SSD1306Ascii.h>
 #include <SSD1306AsciiWire.h>
+#include <Adafruit_NeoPixel.h>
 //#include <RTClib.h>
 #include <TM1637.h>
 
@@ -20,6 +21,9 @@ SSD1306AsciiWire oled;
 
 // Declare an object for the 4-digit display
 TM1637 tm(CLK, DIO);
+
+// Hours that you want to sleep
+const int SLEEP_HOURS = 1;
 
 void setup() {
   // put your setup code here, to run once:
@@ -44,19 +48,18 @@ void setup() {
   tm.set(BRIGHT_TYPICAL);
 }
 
-unsigned int counter = 0;
+unsigned int counter = 3600 * SLEEP_HOURS;
 
 void loop() {
   //DateTime now = rtc.now(); // Get the time from the RTC
   delay(1000);
 
-  tm.display(0, (counter / 1000) % 10);
-  tm.display(1, (counter / 100) % 10);
-  tm.display(2, (counter / 10) % 10);
-  tm.display(3, counter % 10);
+  tm.display(0, (counter / 36000) % 10);
+  tm.display(1, (counter / 3600) % 10);
+  tm.display(2, (counter % 3600) / 600 % 10);
+  tm.display(3, (counter % 3600) / 60 % 10);
 
-  counter++;
-  if (counter == 10000) {
-    counter = 0;
+  if (counter != 0) {
+    counter -= 60;
   }
 }

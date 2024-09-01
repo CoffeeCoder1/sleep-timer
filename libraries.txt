@@ -4,3 +4,4 @@
 SSD1306Ascii
 RTClib
 Grove 4-Digit Display
+Adafruit NeoPixel
