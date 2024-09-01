@@ -13,6 +13,11 @@
 const int CLK = 15;
 const int DIO = 14;
 
+// What pin are the NeoPixels connected to?
+#define LED_PIN 1
+// How many NeoPixels are attached to the Arduino?
+#define LED_COUNT 1
+
 // Declare an object for the OLED
 SSD1306AsciiWire oled;
 
@@ -21,6 +26,9 @@ SSD1306AsciiWire oled;
 
 // Declare an object for the 4-digit display
 TM1637 tm(CLK, DIO);
+
+// Declare an object for the NeoPixel
+Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 // Hours that you want to sleep
 const int SLEEP_HOURS = 1;
@@ -43,12 +51,21 @@ void setup() {
   oled.clear();
   oled.println("Initializing...");
 
+  strip.begin();
+  strip.setPixelColor(0, 255, 255, 0);
+  strip.show(); // Initialize LEDs
+
   // Set up 4-digit display
   tm.init();
   tm.set(BRIGHT_TYPICAL);
+
+  // Clear OLED and LEDs
+  strip.setPixelColor(0, 0, 0, 0);
+  strip.show();
+  oled.clear();
 }
 
-unsigned int counter = 3600 * SLEEP_HOURS;
+unsigned int counter = 10;
 
 void loop() {
   //DateTime now = rtc.now(); // Get the time from the RTC
@@ -60,6 +77,10 @@ void loop() {
   tm.display(3, (counter % 3600) / 60 % 10);
 
   if (counter != 0) {
-    counter -= 60;
+    counter -= 1;
+  } else {
+    // Wake up light
+    strip.setPixelColor(0, 255, 255, 255);
+    strip.show();
   }
 }
