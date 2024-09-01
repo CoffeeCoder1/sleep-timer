@@ -11,17 +11,52 @@
       "left": 105.83,
       "attrs": {}
     },
-    { "type": "wokwi-ds1307", "id": "wokwi-ds1307-0", "top": 234.6, "left": 0.1, "attrs": {} },
-    { "type": "wokwi-ky-040", "id": "wokwi-ky-040-0", "top": 126.5, "left": 114.4, "attrs": {} },
-    { "type": "wokwi-neopixel", "id": "wokwi-neopixel-0", "top": 342.1, "left": 8.6, "attrs": {} },
+    { "type": "wokwi-ds1307", "id": "wokwi-ds1307-0", "top": -63, "left": 230.5, "attrs": {} },
+    {
+      "type": "wokwi-ky-040",
+      "id": "wokwi-ky-040-0",
+      "top": 129.9,
+      "left": 105.6,
+      "rotate": 180,
+      "attrs": {}
+    },
+    { "type": "wokwi-neopixel", "id": "wokwi-neopixel-0", "top": 15.7, "left": -49, "attrs": {} },
     {
       "type": "wokwi-tm1637-7segment",
       "id": "wokwi-tm1637-7segment-0",
-      "top": 230.36,
-      "left": 131.83,
+      "top": 124.76,
+      "left": -204.17,
       "attrs": {}
     }
   ],
-  "connections": [ [ "pico:GP0", "$serialMonitor:RX", "", [] ], [ "pico:GP1", "$serialMonitor:TX", "", [] ] ],
+  "connections": [
+    [ "pico:GP0", "$serialMonitor:RX", "", [] ],
+    [ "pico:GP1", "$serialMonitor:TX", "", [] ],
+    [ "pico:3V3", "board-ssd1306-0:VCC", "red", [ "h19.51", "v-57.6", "h48" ] ],
+    [ "board-ssd1306-0:GND", "pico:GND.8", "black", [ "v-28.8", "h-57.6", "v57.6" ] ],
+    [ "wokwi-ky-040-0:VCC", "pico:3V3", "red", [ "h-9.6", "v-106" ] ],
+    [ "wokwi-ky-040-0:GND", "pico:GND.6", "black", [ "h-19.2", "v-10.4" ] ],
+    [ "pico:GP4", "board-ssd1306-0:SDA", "green", [ "h-9.6", "v-86.4", "h172.8" ] ],
+    [ "pico:GP5", "board-ssd1306-0:SCL", "green", [ "h-19.2", "v-105.6", "h172.8" ] ],
+    [ "wokwi-ky-040-0:CLK", "pico:GP16", "green", [ "h-9.6", "v9.6" ] ],
+    [ "pico:GP17", "wokwi-ky-040-0:DT", "green", [ "h9.91", "v-9.56" ] ],
+    [ "pico:GP18", "wokwi-ky-040-0:SW", "green", [ "h0" ] ],
+    [ "wokwi-tm1637-7segment-0:GND", "pico:GND.4", "black", [ "h28.8", "v-9.6" ] ],
+    [ "pico:GP14", "wokwi-tm1637-7segment-0:DIO", "green", [ "h-19.2", "v-19.16" ] ],
+    [ "pico:GP15", "wokwi-tm1637-7segment-0:CLK", "green", [ "h-28.8", "v-47.96" ] ],
+    [
+      "wokwi-tm1637-7segment-0:VCC",
+      "pico:3V3",
+      "red",
+      [ "h28.8", "v-28.8", "h-19.2", "v-182.4", "h115.2", "v96" ]
+    ],
+    [ "pico:3V3", "wokwi-ds1307-0:5V", "red", [ "h19.51", "v-96", "h124.8", "v38.4" ] ],
+    [ "wokwi-ds1307-0:GND", "pico:GND.8", "black", [ "h-153.6", "v86.4" ] ],
+    [ "wokwi-ds1307-0:SCL", "pico:GP5", "green", [ "h-57.6", "v-9.8", "h-192", "v105.6" ] ],
+    [ "wokwi-ds1307-0:SDA", "pico:GP4", "green", [ "h-57.6", "v9.3", "h-182.4", "v86.4" ] ],
+    [ "wokwi-neopixel-0:DIN", "pico:GP0", "green", [ "h0" ] ],
+    [ "wokwi-neopixel-0:VDD", "pico:GND.8", "black", [ "h-9.6", "v-67.2", "h144", "v86.4" ] ],
+    [ "wokwi-neopixel-0:VSS", "pico:3V3", "red", [ "v-0.9", "h8.8", "v-67.2", "h115.2", "v96" ] ]
+  ],
   "dependencies": {}
 }
