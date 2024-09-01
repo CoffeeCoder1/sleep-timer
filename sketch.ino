@@ -65,7 +65,7 @@ void setup() {
   oled.clear();
 }
 
-unsigned int counter = 10;
+unsigned int counter = 3600 * SLEEP_HOURS;
 
 void loop() {
   //DateTime now = rtc.now(); // Get the time from the RTC
